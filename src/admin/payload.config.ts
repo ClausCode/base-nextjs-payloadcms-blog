@@ -7,6 +7,8 @@ import { buildConfig } from "payload"
 import { fileURLToPath } from "url"
 
 import { MediaCollection, UserCollection } from "./collections"
+import { PostsCollection } from "./collections/post.collection"
+import { ruTranslations } from "./translations/ru"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -14,7 +16,8 @@ const dirname = path.dirname(filename)
 export default buildConfig({
 	admin: {
 		user: UserCollection.slug,
-		theme: "dark",
+		theme: "all",
+		avatar: "default",
 		suppressHydrationWarning: true,
 		importMap: {
 			baseDir: path.resolve(dirname)
@@ -23,15 +26,10 @@ export default buildConfig({
 	i18n: {
 		supportedLanguages: { ru },
 		translations: {
-			ru: {
-				general: {
-					locale: "Язык",
-					locales: "Языки"
-				}
-			}
+			ru: ruTranslations
 		}
 	},
-	collections: [UserCollection, MediaCollection],
+	collections: [UserCollection, PostsCollection, MediaCollection],
 	globals: [],
 	editor: lexicalEditor(),
 	secret: process.env.PAYLOAD_SECRET || "",
