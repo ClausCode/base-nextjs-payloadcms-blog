@@ -1,10 +1,10 @@
-import { withPayload } from "@payloadcms/next/withPayload";
-import type { NextConfig } from "next";
+import { withPayload } from "@payloadcms/next/withPayload"
+import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  experimental: {
-    dynamicIO: true,
-  },
-};
+	experimental: {
+		dynamicIO: true
+	}
+}
 
-export default withPayload(nextConfig);
+export default withPayload(nextConfig)

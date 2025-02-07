@@ -42,6 +42,9 @@ export default buildConfig({
 	typescript: {
 		outputFile: path.resolve(dirname, "payload-types.ts")
 	},
+	routes: {
+		admin: "/dashboard"
+	},
 
 	db: postgresAdapter({
 		pool: {

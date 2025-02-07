@@ -9,8 +9,11 @@ import { RootLayout, handleServerFunctions } from "@payloadcms/next/layouts"
 import type { ServerFunctionClient } from "payload"
 import React, { Suspense } from "react"
 
-import { importMap } from "./admin/importMap.js"
 import "./custom.scss"
+import { importMap } from "./dashboard/importMap.js"
+
+/* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
+/* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
 
 /* THIS FILE WAS GENERATED AUTOMATICALLY BY PAYLOAD. */
 /* DO NOT MODIFY IT BECAUSE IT COULD BE REWRITTEN AT ANY TIME. */
