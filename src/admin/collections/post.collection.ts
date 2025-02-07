@@ -1,3 +1,4 @@
+import cyrillicToLatin from "cyrillic-to-latin"
 import { CollectionConfig } from "payload"
 
 export const PostsCollection: CollectionConfig = {
@@ -8,6 +9,7 @@ export const PostsCollection: CollectionConfig = {
 	},
 	admin: {
 		useAsTitle: "title",
+
 		defaultColumns: ["featuredImage", "title", "status", "publishedDate"]
 	},
 	access: {
@@ -78,6 +80,29 @@ export const PostsCollection: CollectionConfig = {
 			label: "📈 SEO",
 			type: "group",
 			fields: [
+				{
+					name: "slug",
+					type: "text",
+					label: "URL-ссылка",
+					unique: true,
+					admin: {
+						readOnly: true,
+						description: "Будет сгенерировано автоматически из заголовка"
+					},
+					hooks: {
+						beforeValidate: [
+							(props) => {
+								if (props.data?.title) {
+									return cyrillicToLatin(props.data.title)
+										.toLowerCase()
+										.replace(/[^a-zA-Z0-9]+/g, "-")
+										.replace(/^-+|-+$/g, "")
+								}
+								return props.value
+							}
+						]
+					}
+				},
 				{
 					name: "keywords",
 					type: "textarea",

@@ -19,6 +19,7 @@ export default buildConfig({
 		theme: "all",
 		avatar: "default",
 		suppressHydrationWarning: true,
+		dateFormat: "dd MMMM yyy, HH:mm",
 		importMap: {
 			baseDir: path.resolve(dirname)
 		}
