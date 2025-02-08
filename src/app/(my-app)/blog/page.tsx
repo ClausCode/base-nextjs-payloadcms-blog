@@ -1,6 +1,8 @@
+import Link from "next/link"
 import { Suspense } from "react"
 
 import { PostCard } from "@/components/post-card"
+import { Button } from "@/components/ui/button"
 import {
 	Pagination,
 	PaginationContent,
@@ -27,6 +29,22 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 			hasNextPage,
 			hasPrevPage
 		} = await getPosts(currentPage, postsPerPage)
+
+		if (!posts || posts.length === 0) {
+			return (
+				<main className="container mx-auto py-6 lg:py-10">
+					<div className="flex flex-col items-center gap-4">
+						<h1 className="text-3xl font-bold">Записи не найдены</h1>
+						<p className="text-muted-foreground">
+							В данный момент записей в блоге нет или они недоступны
+						</p>
+						<Button asChild>
+							<Link href="/">Вернуться на первую страницу</Link>
+						</Button>
+					</div>
+				</main>
+			)
+		}
 
 		return (
 			<main className="container py-6 lg:py-10">
@@ -76,12 +94,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 		return (
 			<main className="container py-6 lg:py-10">
 				<div className="flex flex-col items-center gap-4">
-					<h1 className="text-3xl font-bold">Ошибка</h1>
+					<h1 className="text-3xl font-bold">Ошибка загрузки</h1>
 					<p className="text-muted-foreground">
 						{error instanceof Error
-							? error.message
-							: "Произошла неизвестная ошибка"}
+							? `Не удалось загрузить записи блога: ${error.message}`
+							: "Произошла неизвестная ошибка при загрузке записей блога"}
 					</p>
+					<PaginationLink href="/blog" className="mt-4">
+						Попробовать снова
+					</PaginationLink>
 				</div>
 			</main>
 		)
